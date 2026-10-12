@@ -1,8 +1,8 @@
-# SAVE & PLANT TREES! – Tree Pledge & Plantation Tracker
+# We for Earth! – Tree Pledge & Plantation Tracker
 
 A simple, free, open-source web prototype where youth pledge a tree, record it, and track progress.
 
-Founded in 2020 by Priyanka Chakraborty. Blog: https://save-trees-plant-trees.blogspot.com
+Founded in 2025 by Priyanka Chakraborty.
 
 ## Problem
 Many plantation drives are one-time events. Students and communities have no easy way to record the saplings they plant or follow up on them.
