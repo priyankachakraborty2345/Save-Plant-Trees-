@@ -1,0 +1,6 @@
+name,species,place,status,planting_date,last_check_in,health,check_ins
+Asha,Hollong,Guwahati,Planted,2026-06-05,2026-09-05,Alive,3
+Rahul,Guava,Dibrugarh,Pledged,2026-06-07,2026-06-07,New,0
+Meera,Nahar,Jorhat,Planted,2026-06-10,2026-08-10,Needs care,2
+Imran,Bamboo,Silchar,Planted,2026-06-12,2026-09-12,Alive,3
+Priya,Neem,Tezpur,Planted,2026-06-15,2026-07-15,Lost,1
