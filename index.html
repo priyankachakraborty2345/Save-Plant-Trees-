@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WE FOR EARTH – Learn, Plant and Track Trees</title>
+<style>
+:root{--ink:#14281f;--forest:#1f4d3a;--leaf:#4f9a5e;--mist:#f1f6f1;--sun:#e2a400;--line:#cfdccf}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,'Times New Roman',serif;background:var(--mist);color:var(--ink);line-height:1.6}
+header{background:var(--forest);color:#fff;padding:2rem 1.2rem 1.2rem}
+header h1{margin:0 0 .3rem;font-size:clamp(1.7rem,6vw,2.6rem)}
+header p{margin:0;max-width:36rem;color:#d9ecd9}
+nav{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem}
+nav button{margin:0;background:#2d6b52;border:1px solid #4f9a5e}
+nav button[aria-selected=true]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
+main{max-width:46rem;margin:0 auto;padding:1.2rem}
+section{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.2rem;margin-bottom:1.2rem}
+h2{margin-top:0;color:var(--forest)}
+.stats{display:flex;gap:1rem;flex-wrap:wrap}
+.stats div{flex:1 1 7rem;border-left:4px solid var(--sun);padding-left:.8rem}
+.stats b{display:block;font-size:1.9rem;color:var(--forest)}
+label{display:block;margin:.7rem 0 .2rem;font-weight:bold}
+input,select{width:100%;padding:.6rem;border:1px solid var(--line);border-radius:6px;font:inherit}
+button{margin-top:.8rem;background:var(--forest);color:#fff;border:0;border-radius:6px;padding:.6rem 1.1rem;font:inherit;cursor:pointer}
+button.s{padding:.25rem .6rem;margin:.1rem;font-size:.85rem}
+button:focus,input:focus,select:focus,summary:focus{outline:3px solid var(--sun)}
+.err{color:#a12b2b}.ok{color:var(--forest)}
+.wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:34rem}
+th,td{text-align:left;padding:.5rem;border-bottom:1px solid var(--line);vertical-align:top}
+details{border:1px solid var(--line);border-radius:8px;padding:.6rem .9rem;margin:.6rem 0}
+summary{cursor:pointer;font-weight:bold;color:var(--forest)}
+.q{margin:.7rem 0}.q label{font-weight:normal;margin:.1rem 0}.q input{width:auto}
+.card{border-left:4px solid var(--leaf);padding-left:.8rem;margin:.8rem 0}
+.hide{display:none}
+footer{text-align:center;padding:1rem;font-size:.9rem}
+a{color:var(--forest)}
+</style></head><body>
+<header><h1>WE FOR EARTH</h1>
+<p>Learn. Plant. Check in. A youth-led platform where every sapling is followed until it grows.</p>
+<nav role="tablist"><button role="tab" data-t="home" aria-selected="true">My Progress</button><button role="tab" data-t="learn" aria-selected="false">Learn</button><button role="tab" data-t="plant" aria-selected="false">Plant &amp; Track</button></nav></header>
+<main>
+<div id="home">
+<section><h2>My progress</h2>
+<div class="stats"><div><b id="total">0</b>trees pledged</div><div><b id="planted">0</b>trees planted</div><div><b id="alive">0</b>alive at last check-in</div><div><b id="pts">0</b>Green Points</div></div>
+<p>The Learn → Plant → Check in loop: learn something, plant a tree, and come back to check on it. Most tree drives stop at planting. We follow the tree.</p></section>
+<section><h2>Why this matters (UN SDGs)</h2>
+<p>SDG 4 Quality Education (lessons and quizzes), SDG 13 Climate Action, SDG 15 Life on Land, SDG 11 Sustainable Cities and Communities, SDG 17 Partnerships.</p></section>
+</div>
+
+<div id="learn" class="hide">
+<section><h2>Learn: short lessons</h2><p>Read a lesson, then answer 3 questions. Get all 3 right to earn 10 Green Points (once per lesson).</p><div id="lessons"></div></section>
+<section><h2>Native trees of Assam</h2>
+<div class="card"><b>Hollong</b> (<i>Dipterocarpus macrocarpus</i>) is the State Tree of Assam. The Assam State Biodiversity Board calls it the tallest tree of Assam.</div>
+<div class="card"><b>Nahar</b> (<i>Mesua ferrea</i>) grows in the forests of southern Assam, along with other native trees.</div>
+<div class="card"><b>Bamboo:</b> 38 naturally growing species are recorded in Assam, and bamboo is important in people's daily life.</div>
+<p>Tip: ask a local nursery or the Forest Department which native saplings suit your place. Sources are listed in the README.</p></section>
+</div>
+
+<div id="plant" class="hide">
+<section><h2>Pledge a tree</h2>
+<label for="name">Your name</label><input id="name" maxlength="60">
+<label for="species">Tree species (pick or type)</label><input id="species" list="sp" maxlength="40">
+<datalist id="sp"><option>Hollong</option><option>Nahar</option><option>Bamboo</option><option>Neem</option><option>Guava</option></datalist>
+<label for="place">Place (school, village or city)</label><input id="place" maxlength="60">
+<label for="status">Status</label><select id="status"><option>Pledged</option><option>Planted</option></select>
+<button id="add" type="button">Add my tree (+5 points)</button><div id="msg" role="status"></div></section>
+<section><h2>Tree log and check-ins</h2>
+<p>Come back every 30 days and tell us how your tree is doing (+2 points).</p>
+<div class="wrap"><table><thead><tr><th>Tree</th><th>Place</th><th>Status</th><th>Health</th><th>Check in</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p id="empty">No trees yet. Add the first one above.</p>
+<button id="clear" type="button">Clear my data</button></section>
+</div>
+</main>
+<footer>WE FOR EARTH prototype · by the founder of <a href="https://save-trees-plant-trees.blogspot.com">SAVE &amp; PLANT TREES!</a> · Open source, MIT License</footer>
+<script>
+var L=[
+{t:"Why trees matter",x:"Trees take in carbon dioxide and give out oxygen. They give shade, hold the soil with their roots, and give homes to birds and insects.",q:[["Which gas do trees take in?",["Oxygen","Carbon dioxide","Nitrogen"],1],["How do roots help the soil?",["They hold it in place","They make it dry","They remove it"],0],["Which SDG is 'Life on Land'?",["SDG 4","SDG 13","SDG 15"],2]]},
+{t:"How to plant and care for a sapling",x:"Choose a native species. Dig a pit wider than the roots. Water often in the first months, add mulch to keep the soil moist, and protect the sapling from animals.",q:[["Which kind of tree is a good choice?",["A native species","Any plastic plant","Only fruit trees"],0],["What matters most after planting?",["Forgetting it","Regular care and water","Painting the trunk"],1],["Why add mulch?",["It keeps the soil moist","It stops all rain","It makes leaves blue"],0]]},
+{t:"Climate change basics",x:"The Earth is getting warmer mainly because burning coal, oil and gas adds carbon dioxide to the air. This brings more heat and heavier floods. Trees help absorb carbon dioxide, but we must also cut pollution.",q:[["What is the main cause of warming?",["Burning fossil fuels","Planting trees","Rain"],0],["Which SDG is 'Climate Action'?",["SDG 13","SDG 4","SDG 11"],0],["Can trees alone solve climate change?",["Yes, completely","No, we must also cut pollution","Trees cause it"],1]]},
+{t:"Save water and reduce waste",x:"Fix leaking taps, switch off water when not needed, and reuse clean used water for plants. Carry a cloth bag and bottle, and turn kitchen scraps into compost.",q:[["Used clean water can be reused for…",["Watering plants","Drinking","Nothing"],0],["Kitchen scraps can become…",["Compost","Plastic","Glass"],0],["Which reduces waste?",["Carrying a cloth bag","Using many plastic bags","Burning trash"],0]]}];
+var K={tr:"wfe_trees",pt:"wfe_pts",dn:"wfe_done"};
+function ld(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var T=ld(K.tr,[]),P=ld(K.pt,0),D=ld(K.dn,{});
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function today(){return new Date().toISOString().slice(0,10)}
+function due(t){if(t.status!=="Planted"||t.health==="Lost")return false;return (new Date(today())-new Date(t.last))/864e5>=30}
+function pts(n){P+=n;sv(K.pt,P)}
+function render(){
+ var r="";T.forEach(function(t,i){r+="<tr><td>"+esc(t.species)+"<br><small>"+esc(t.name)+"</small></td><td>"+esc(t.place)+"</td><td>"+esc(t.status)+"</td><td>"+esc(t.health)+(due(t)?"<br><b>Check-in due</b>":"")+"</td><td>"+(t.status==="Planted"?"<button class='s' data-i='"+i+"' data-h='Alive'>Alive</button><button class='s' data-i='"+i+"' data-h='Needs care'>Needs care</button><button class='s' data-i='"+i+"' data-h='Lost'>Lost</button>":"<button class='s' data-i='"+i+"' data-p='1'>Mark planted</button>")+"</td></tr>"});
+ document.getElementById("rows").innerHTML=r;
+ var ch=T.filter(function(t){return t.checks>0&&t.health!=="New"});
+ document.getElementById("total").textContent=T.length;
+ document.getElementById("planted").textContent=T.filter(function(t){return t.status==="Planted"}).length;
+ document.getElementById("alive").textContent=ch.length?ch.filter(function(t){return t.health==="Alive"}).length+" of "+ch.length:"0";
+ document.getElementById("pts").textContent=P;
+ document.getElementById("empty").style.display=T.length?"none":"block";
+}
+document.getElementById("rows").onclick=function(e){var b=e.target;if(b.tagName!=="BUTTON")return;var t=T[b.dataset.i];
+ if(b.dataset.p){t.status="Planted";t.last=today()}else{t.health=b.dataset.h;t.last=today();t.checks++;pts(2)}
+ sv(K.tr,T);render()};
+document.getElementById("add").onclick=function(){
+ var n=document.getElementById("name").value.trim(),s=document.getElementById("species").value.trim(),p=document.getElementById("place").value.trim(),m=document.getElementById("msg");
+ if(!n||!s||!p){m.className="err";m.textContent="Please fill in your name, the tree species and the place.";return}
+ T.push({name:n,species:s,place:p,status:document.getElementById("status").value,date:today(),last:today(),health:"New",checks:0});
+ sv(K.tr,T);pts(5);render();
+ ["name","species","place"].forEach(function(i){document.getElementById(i).value=""});
+ m.className="ok";m.textContent="Tree added. Thank you for planting hope.";};
+document.getElementById("clear").onclick=function(){T=[];P=0;D={};sv(K.tr,T);sv(K.pt,P);sv(K.dn,D);render();build()};
+function build(){var h="";L.forEach(function(l,i){h+="<details><summary>"+(i+1)+". "+esc(l.t)+(D[i]?" ✓":"")+"</summary><p>"+esc(l.x)+"</p>";
+ l.q.forEach(function(q,j){h+="<div class='q'><b>"+esc(q[0])+"</b>";q[1].forEach(function(o,k){h+="<label><input type='radio' name='q"+i+"_"+j+"' value='"+k+"'> "+esc(o)+"</label>"});h+="</div>"});
+ h+="<button class='s' data-l='"+i+"'>Check answers</button> <span id='r"+i+"'></span></details>"});
+ document.getElementById("lessons").innerHTML=h}
+document.getElementById("lessons").onclick=function(e){var b=e.target;if(b.dataset.l===undefined)return;var i=+b.dataset.l,c=0;
+ L[i].q.forEach(function(q,j){var s=document.querySelector("input[name='q"+i+"_"+j+"']:checked");if(s&&+s.value===q[2])c++});
+ var r=document.getElementById("r"+i);r.textContent=c+" of 3 correct. ";
+ if(c===3&&!D[i]){D[i]=1;sv(K.dn,D);pts(10);r.textContent+="Well done! +10 Green Points.";render()}else if(c===3){r.textContent+="Well done!"}else{r.textContent+="Try again."}};
+var tabs=document.querySelectorAll("nav button");
+tabs.forEach(function(b){b.onclick=function(){tabs.forEach(function(x){x.setAttribute("aria-selected",x===b)});["home","learn","plant"].forEach(function(id){document.getElementById(id).className=id===b.dataset.t?"":"hide"})}});
+build();render();
+</script></body></html>
